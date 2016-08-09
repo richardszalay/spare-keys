@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.email       = 'richard@richardszalay.com'
   s.files       = ["lib/spare_keys.rb"]
   s.homepage    =
-    'https://rubygems.org/gems/spare_keys'
+    'https://github.com/richardszalay/spare-keys'
   s.license       = 'MIT'
 
   s.add_development_dependency "rspec", "~> 3.2"
