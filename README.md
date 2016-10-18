@@ -20,19 +20,19 @@ end
 ## Usage
 
 ```ruby
-SpareKeys.temp_keychain do |temp_keychain_path|
+SpareKeys.temp_keychain do |temp_keychain_path, temp_keychain_password|
   # The keychain list starts with +temp_keychain_path+
 end
 
 # Everything is back to normal now
 
-SpareKeys.temp_keychain true do |temp_keychain_path|
+SpareKeys.temp_keychain true do |temp_keychain_path, temp_keychain_password|
   # The keychain list is empty, apart from +temp_keychain_path+
 end
 
 # Everything is back to normal now
 
-SpareKeys.temp_keychain true, "default" do |temp_keychain_path|
+SpareKeys.temp_keychain true, "default" do |temp_keychain_path, temp_keychain_password|
   # The keychain list is empty, apart from +temp_keychain_path+
   # The default keychain has been set to temp_keychain_path
 end
