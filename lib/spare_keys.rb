@@ -44,7 +44,9 @@ class SpareKeys
         require 'securerandom'
 
         password = SecureRandom.hex
-        temp_keychain = Dir::Tmpname.make_tmpname(['spare-keys-', '.keychain'], nil)
+
+        extension = keychain_extension()
+        temp_keychain = Dir::Tmpname.make_tmpname(['spare-keys-', extension], nil)
 
         `security create-keychain -p "#{password}" #{temp_keychain}`
         `security unlock-keychain -p "#{password}" #{temp_keychain}`
@@ -60,6 +62,22 @@ class SpareKeys
         else
             use_keychain(temp_keychain, clear_list, type)
         end
+    end
+
+private
+
+    def self.keychain_extension()
+        return is_sierra() ? '.keychain-db' : '.keychain' 
+    end
+
+    def self.is_sierra()
+ 
+        osVersion = `sysctl -n kern.osrelease`
+    
+        majorOsVersion = Integer(osVersion.split('.')[0])
+    
+        return majorOsVersion >= 16 # Sierra
+    
     end
 
 end
