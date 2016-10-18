@@ -52,7 +52,7 @@ class SpareKeys
         if block_given?
             begin
                 use_keychain(temp_keychain, clear_list, type) {
-                    yield temp_keychain
+                    yield temp_keychain, password
                 }
             ensure
                 `security delete-keychain #{temp_keychain}`
