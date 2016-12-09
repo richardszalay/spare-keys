@@ -1,4 +1,5 @@
 
+
 # Temporarily reconfigures the active keychain
 class SpareKeys
 
@@ -13,6 +14,8 @@ class SpareKeys
     def self.use_keychain(keychain_path, clear_list = false, type = nil, domain = nil)
         domain_flag = "-d #{domain}" if domain
 
+        keychain_path = expand_keychain_path(keychain_path)
+
         original_list = `security list-keychains #{domain_flag} | xargs`
         original_keychain = `security #{type}-keychain #{domain_flag} | xargs` if type 
 
@@ -26,6 +29,16 @@ class SpareKeys
                 yield if block_given?
             ensure
                 original_keychain = `security #{type}-keychain #{domain_flag} -s #{original_keychain}` if type
+                
+                unless clear_list
+                    # Grab the keychain list as it looks right now in case
+                    # another process has changed it
+                    current_list = `security list-keychains #{domain_flag}`
+                    current_list_as_array = current_list.scan(/"[^"]*"/).map { |item| item.gsub(/^"|"$/, "")}
+                    # Remove the supplied keychain
+                    original_list = (current_list_as_array.reject { |item| item == keychain_path }).join(" ")
+                end
+                
                 `security list-keychains #{domain_flag} -s #{original_list}`
             end
         end
@@ -79,6 +92,19 @@ private
     
         return majorOsVersion >= 16 # Sierra
     
+    end
+
+    def self.expand_keychain_path(path)
+
+        if (File.basename(path) == path)
+            default_keychain_path = File.expand_path("~/Library/Keychains")
+
+            path = File.join(default_keychain_path, path)
+        else
+            path = File.expand_path(path)
+        end
+
+        return path
     end
 
 end
