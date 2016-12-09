@@ -85,6 +85,27 @@ describe SpareKeys, '#use_keychain' do
     end
   end
 
+  context "when clear_list is false" do
+    before do
+      @list_before_block = capture_keychain_list
+      @list_in_block = nil
+      
+      SpareKeys.use_keychain @example_keychain, false do
+        @list_in_block = capture_keychain_list
+      end
+      
+      @list_after_block = capture_keychain_list
+    end
+
+    it "should not remove other keychain entries for the duration of the block" do
+        expect(@list_in_block).to include("login.keychain")
+    end
+
+    it "should revert the keychain list after the block" do
+      expect(@list_after_block).to eql(@list_before_block)
+    end
+  end
+
   context "when type is specified" do
     before do
       @default_before_block = capture_keychain("default")
