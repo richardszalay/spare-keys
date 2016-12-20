@@ -33,7 +33,7 @@ class SpareKeys
                     current_list = `security list-keychains #{domain_flag}`
                     current_list_as_array = current_list.scan(/"[^"]*"/).map { |item| item.gsub(/^"|"$/, "")}
                     # Remove the supplied keychain
-                    original_list = (current_list_as_array.reject { |item| item.include? keychain_path }).join(" ")
+                    original_list = (current_list_as_array.reject { |item| item == keychain_path }).join(" ")
                 end
                 
                 `security list-keychains #{domain_flag} -s #{original_list}`
