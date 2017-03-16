@@ -1,3 +1,7 @@
+1.2.0
+- Temp keychains no longer time out during very long builds (#6)
+- When clear_list is false, keychains added by other processes during the build are respected (#3) 
+
 1.1.1
 - Keychains are now created with keychain-db extension on macOS Sierra (#1)
 - Password is now provided to temp_keychain block (#2)
