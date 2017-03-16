@@ -49,6 +49,7 @@ class SpareKeys
         temp_keychain = Dir::Tmpname.make_tmpname(['spare-keys-', extension], nil)
 
         `security create-keychain -p "#{password}" #{temp_keychain}`
+        `security set-keychain-settings #{temp_keychain}`
         `security unlock-keychain -p "#{password}" #{temp_keychain}`
 
         if block_given?

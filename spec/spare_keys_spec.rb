@@ -124,6 +124,10 @@ describe SpareKeys, '#temp_keychain' do
     `security list-keychains | xargs`
   end
 
+  def timeout_of_keychain(path)
+    `security show-keychain-info #{path} 2>&1 | awk '{ print $NF }' | tr -d ' \t\r\n'`
+  end
+
   context "when block is supplied" do
 
     before do
@@ -131,6 +135,7 @@ describe SpareKeys, '#temp_keychain' do
       SpareKeys.temp_keychain true do |tmp|
         @list_in_block = capture_keychain_list
         @temp_keychain = tmp
+        @timeout_keychain = timeout_of_keychain(tmp)
       end
       @list_after_block = capture_keychain_list
     end 
@@ -142,6 +147,10 @@ describe SpareKeys, '#temp_keychain' do
 
     it "should revert the keychain list after the block" do
       expect(@list_after_block).to eql(@list_before_block)
+    end
+
+    it "should unlock the keychain indefinitely" do
+      expect(@timeout_keychain).to eql("no-timeout")
     end
 
   end
