@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spare_keys (1.0.0)
+    spare_keys (1.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -26,10 +26,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler
-  rake
+  bundler (~> 1.12, >= 1.12.5)
+  rake (~> 0.9.6)
   rspec (~> 3.2)
   spare_keys!
 
 BUNDLED WITH
-   1.12.5
+   1.13.6
