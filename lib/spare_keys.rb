@@ -26,6 +26,16 @@ class SpareKeys
                 yield if block_given?
             ensure
                 original_keychain = `security #{type}-keychain #{domain_flag} -s #{original_keychain}` if type
+                
+                unless clear_list
+                    # Grab the keychain list as it looks right now in case
+                    # another process has changed it
+                    current_list = `security list-keychains #{domain_flag}`
+                    current_list_as_array = current_list.scan(/"[^"]*"/).map { |item| item.gsub(/^"|"$/, "")}
+                    # Remove the supplied keychain
+                    original_list = (current_list_as_array.reject { |item| item.include? keychain_path }).join(" ")
+                end
+                
                 `security list-keychains #{domain_flag} -s #{original_list}`
             end
         end
