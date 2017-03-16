@@ -2,6 +2,7 @@ Ruby Gem for temporarily modifying the Mac OS Keychain configuration. Useful for
 
 This utility was created specifically for use with Fastlane's match / resign utilities. The process requires a keychain, but since match uses a git repository as the "source of truth" there's no need for the keychain to exist after the re-signing.
 
+
 ## API
 
 ```ruby
@@ -40,3 +41,10 @@ end
 # Everything is back to normal now
 ```
 
+## `clear_list` usage
+
+When `clear_list` is set to `true`, the supplied keychain will be configured as the only keychain in the list, 
+preventing the possibility of fallback to another (locked) keychain.
+
+However, if your server can have multiple builds running concurrently `clear_list` will remove temp keychains 
+added by other builds, causing them to fail. If this is an issue for you, set `clear_list` to `false`.
