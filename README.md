@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/richardszalay/spare-keys.svg?branch=master)](https://travis-ci.org/richardszalay/spare-keys)
+
 Ruby Gem for temporarily modifying the Mac OS Keychain configuration. Useful for shared environments or processes with transient Keychain requirements.
 
 This utility was created specifically for use with Fastlane's match / resign utilities. The process requires a keychain, but since match uses a git repository as the "source of truth" there's no need for the keychain to exist after the re-signing.
