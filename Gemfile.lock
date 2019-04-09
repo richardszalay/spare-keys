@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spare_keys (1.2.0)
+    spare_keys (1.2.1)
 
 GEM
   remote: https://rubygems.org/
@@ -32,4 +32,4 @@ DEPENDENCIES
   spare_keys!
 
 BUNDLED WITH
-   1.13.6
+   1.15.4
