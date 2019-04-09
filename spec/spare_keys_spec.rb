@@ -4,7 +4,7 @@ describe SpareKeys, '#use_keychain' do
 
   before(:context) do
     require 'tempfile'
-    @example_keychain = Dir::Tmpname.make_tmpname(['spare-keys-spec-', SpareKeys.keychain_extension()], nil)
+    @example_keychain = SpareKeys.temporary_keychain_name('spare-keys-spec')
     `security create-keychain -p "" #{@example_keychain}`
   end
 

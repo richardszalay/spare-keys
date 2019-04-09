@@ -57,9 +57,7 @@ class SpareKeys
         require 'securerandom'
 
         password = SecureRandom.hex
-
-        extension = keychain_extension()
-        temp_keychain = Dir::Tmpname.make_tmpname(['spare-keys-', extension], nil)
+        temp_keychain = temporary_keychain_name('spare-keys')
 
         `security create-keychain -p "#{password}" #{temp_keychain}`
         `security set-keychain-settings #{temp_keychain}`
@@ -105,6 +103,12 @@ private
         end
 
         return path
+    end
+
+    def self.temporary_keychain_name(prefix)
+        t = Time.now.strftime("%Y%m%d")
+        extension = keychain_extension()
+        "#{prefix}-#{t}-#{$$}-#{rand(0x100000000).to_s(36)}#{extension}"
     end
 
 end
