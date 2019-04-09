@@ -55,5 +55,5 @@ added by other builds, causing them to fail. If this is an issue for you, set `c
 
 Many thanks to all the members of the community that have contributed PRs to this project:
 
-* [https://github.com/bramseynhaeve](bramseynhaeve)
+* [bramseynhaeve](https://github.com/bramseynhaeve)
 
