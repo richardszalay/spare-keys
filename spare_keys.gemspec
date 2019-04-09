@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'spare_keys'
-  s.version     = '1.2.0'
-  s.date        = '2017-03-16'
+  s.version     = '1.2.1'
+  s.date        = '2019-04-10'
   s.summary     = "Temporarily keychain switcher"
   s.description = "Isolates keychain access for use with keychain-dependent utilities"
   s.authors     = ["Richard Szalay"]

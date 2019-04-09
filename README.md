@@ -50,3 +50,10 @@ preventing the possibility of fallback to another (locked) keychain.
 
 However, if your server can have multiple builds running concurrently `clear_list` will remove temp keychains 
 added by other builds, causing them to fail. If this is an issue for you, set `clear_list` to `false`.
+
+## Contributors
+
+Many thanks to all the members of the community that have contributed PRs to this project:
+
+* [https://github.com/bramseynhaeve](bramseynhaeve)
+

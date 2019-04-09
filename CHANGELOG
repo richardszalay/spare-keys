@@ -1,3 +1,6 @@
+1.2.1
+- Fix compatibility with Ruby 2.5+ (#10) - Thanks @bramseynhaeve!
+
 1.2.0
 - Temp keychains no longer time out during very long builds (#6)
 - When clear_list is false, keychains added by other processes during the build are respected (#3) 
